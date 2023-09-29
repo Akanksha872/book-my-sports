@@ -1,1 +1,1 @@
-# book-my-sports
+# Book my sport
