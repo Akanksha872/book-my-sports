@@ -7,9 +7,21 @@ Book my sport is a React application that allows users to register sport events.
 - **NPM**: 9.5.0
 
 ## 🚀 Setup Guide
-1. npm install
-2. change in .env REACT_APP_API_URL to point to backend
-2. npm start
+1. `npm install`
+2. change `REACT_APP_API_URL` in .env to point to backend
+2. `npm start`
+
+## Docker Setup
+1. Build Image:
+
+`docker build -t book-my-sport-app .`
+
+2. Run Docker Image:
+
+`docker run -p 3000:3000 book-my-sport-app`
+
+
+
 ## Pages
 1. **Sign-In page:**
 
