@@ -2,10 +2,11 @@ import { createSlice } from '@reduxjs/toolkit';
 
 const registeredEventsSlice = createSlice({
   name: 'registeredEvents',
-  initialState: [],
+  initialState: { events: [], eventIds: [] },
   reducers: {
     setRegisteredEvents: (state, action) => {
-      return action.payload;
+      state.events = action.payload; // Store the array of registered events
+      state.eventIds = action.payload.map((event) => event.id); // Extract and store only the IDs
     },
   },
 });

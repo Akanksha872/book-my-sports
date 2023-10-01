@@ -2,11 +2,11 @@ import {
   Card, CardContent, Typography, Button, CardMedia, Box
 } from '@mui/material';
 import Divider from '@mui/material/Divider';
-
 import PropTypes from 'prop-types';
 import { formatDateTimeToDate, formatDateTimeToTime } from '../../utils/eventUtil';
+import '../../styles/page.css';
 
-function EventCard ({ event, allEvents, updateEvents }) {
+function EventCard ({ event, allEvents, updateEvents, registeredEventIds }) {
 
   const handleSubmit = async () => {
     updateEvents({ event: event, allEvents });
@@ -14,6 +14,7 @@ function EventCard ({ event, allEvents, updateEvents }) {
 
   return (
     <Card>
+      {registeredEventIds && registeredEventIds.includes(event.id) && <div className="card-label">Registered</div>}
       <CardMedia
         component="img"
         alt="Image"
@@ -42,7 +43,7 @@ function EventCard ({ event, allEvents, updateEvents }) {
             </Typography>
           </Box>
 
-          <Button variant="contained" color="secondary" onClick={handleSubmit} size="small">
+          <Button variant="contained" color={ allEvents ? "secondary" : "error"} onClick={handleSubmit} size="small">
             {allEvents ? 'Register' : 'Remove'}
           </Button>
         </Box>
@@ -62,5 +63,6 @@ EventCard.propTypes = {
   }).isRequired,
   allEvents: PropTypes.bool.isRequired,
   updateEvents: PropTypes.func.isRequired,
+  registeredEventIds: PropTypes.array
 };
 export default EventCard;

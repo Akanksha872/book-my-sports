@@ -12,6 +12,7 @@ function AllEventsComponent ({
   errorMsg,
   events,
   registeredEvents,
+  registeredEventIds,
   updateEvents,
   handleCloseSnackbar,
 }) {
@@ -21,7 +22,7 @@ function AllEventsComponent ({
   }
   
   return (
-    <div className="page-background">
+    <div>
       <Header />
       <Box>
         <SnackbarNotification
@@ -33,7 +34,7 @@ function AllEventsComponent ({
         <Box display="flex" flexDirection="row" mt={5}>
           <Box mr={5} ml={2} className="event-list">
             <Typography variant="h4" color="inherit" align="center" mt={2} mb={4}>Events near you</Typography>
-            <EventList eventsList={events} allEvents={true} updateEvents={updateEvents}/>
+            <EventList eventsList={events} allEvents={true} updateEvents={updateEvents} registeredEventIds={registeredEventIds}/>
           </Box>
           <Box className="event-list">
             <Typography variant="h4" color="inherit" align="center" mt={2} mb={4}>All your registered events</Typography>
@@ -52,6 +53,7 @@ AllEventsComponent.propTypes = {
   errorMsg: PropTypes.string.isRequired,
   events: PropTypes.array.isRequired,
   registeredEvents: PropTypes.array.isRequired,
+  registeredEventIds: PropTypes.array.isRequired,
   updateEvents: PropTypes.func.isRequired,
   handleCloseSnackbar: PropTypes.func.isRequired,
 };

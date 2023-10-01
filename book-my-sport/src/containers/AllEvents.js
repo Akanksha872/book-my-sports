@@ -14,8 +14,9 @@ function AllEvents () {
 
   const dispatch = useDispatch();
   const events = useSelector((state) => state.events);
-  const registeredEvents = useSelector((state) => state.registeredEvents);
- 
+  const registeredEvents = useSelector((state) => state.registeredEvents.events);
+  const registeredEventIds = useSelector((state) => state.registeredEvents.eventIds);
+  
   useEffect(() => {
     getAllEvents();
     getAllUserEvents();
@@ -113,6 +114,7 @@ function AllEvents () {
       errorMsg={errorMsg}
       events={events}
       registeredEvents={registeredEvents}
+      registeredEventIds={registeredEventIds}
       updateEvents={updateEvents}
       handleCloseSnackbar={handleCloseSnackbar}
     />

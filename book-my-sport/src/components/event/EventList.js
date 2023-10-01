@@ -3,7 +3,7 @@ import Grid from '@mui/material/Grid';
 import PropTypes from 'prop-types';
 import EventCard from './EventCard';
 
-function EventList ({ eventsList, allEvents, updateEvents }) {
+function EventList ({ eventsList, allEvents, updateEvents, registeredEventIds }) {
   
   if(!eventsList.length){
     return <Typography variant="h6" color="inherit" align="center" mt={2} mb={4}>No Data Available</Typography>
@@ -13,7 +13,7 @@ function EventList ({ eventsList, allEvents, updateEvents }) {
     <Grid container spacing={2}>
       {eventsList.map((event) => (
         <Grid item key={event.id} xs={12} sm={6} md={5} lg={4}>
-          <EventCard event={event} allEvents={allEvents}  updateEvents={updateEvents} />
+          <EventCard event={event} allEvents={allEvents}  updateEvents={updateEvents}  registeredEventIds={registeredEventIds}/>
         </Grid>
       ))}
     </Grid>
@@ -31,6 +31,7 @@ EventList.propTypes = {
     })
   ).isRequired,
   allEvents: PropTypes.bool.isRequired,
+  registeredEventIds: PropTypes.array,
   updateEvents: PropTypes.func.isRequired,
 };
 
