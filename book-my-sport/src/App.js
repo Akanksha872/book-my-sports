@@ -1,31 +1,18 @@
-import Button from '@mui/material/Button';
 import './App.css';
-import { createTheme } from '@mui/material/styles';
 import { ThemeProvider } from '@mui/material/styles';
+import { BrowserRouter as Router } from 'react-router-dom';
+import AppRoutes from './routing/Routes';
+import { customTheme } from './styles/theme';
 
-
-const customTheme = createTheme({
-  palette: {
-    primary: {
-      main: '#FF0566', // pink
-    },
-    secondary: {
-      main: '#0436FF', // Blue
-    },
-  },
-});
-
-function App() {
+function App () {
   return (
     <ThemeProvider theme={customTheme}>
-     <Button variant="contained" color="secondary">
-        Material-UI Button
-      </Button>
-      <Button variant="contained" color="primary">
-        Material-UI Button
-      </Button>
+      <Router>
+        <div className="App">
+          <AppRoutes />
+        </div>
+      </Router>
     </ThemeProvider>
-
   );
 }
 
