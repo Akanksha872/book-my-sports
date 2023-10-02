@@ -4,6 +4,7 @@ import TextField from '@mui/material/TextField';
 import Typography from '@mui/material/Typography';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
+import Loader from '../common/Loader';
 import SnackbarNotification from '../common/SnackbarNotification';
 import AuthPage from './AuthPage';
 
@@ -20,7 +21,7 @@ function SignInComponent ({
   handleCloseSnackbar,
 }) {
   if (loading) {
-    return <div>Loading...</div>;
+    return <Loader></Loader>
   }
 
   return (

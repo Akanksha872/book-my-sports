@@ -35,3 +35,8 @@
   position: relative; 
   z-index: 0; 
 }
+
+.loader {
+  height: 100%;
+  background-color: #BBFFE8;
+}

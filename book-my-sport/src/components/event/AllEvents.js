@@ -2,6 +2,7 @@ import { Box, Typography } from '@mui/material';
 import '../../styles/page.css';
 import PropTypes from 'prop-types';
 import Header from '../common/Header';
+import Loader from '../common/Loader';
 import SnackbarNotification from '../common/SnackbarNotification';
 import EventList from './EventList';
 
@@ -18,7 +19,7 @@ function AllEventsComponent ({
 }) {
 
   if (loading) {
-    return <div>Loading...</div>;
+    return <Loader></Loader>
   }
   
   return (
