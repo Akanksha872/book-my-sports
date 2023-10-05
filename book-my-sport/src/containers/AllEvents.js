@@ -24,6 +24,43 @@ function AllEvents () {
     setEventsUpdated(false);
   }, [eventsUpdated]);
 
+
+  const getAllEvents =  async () => {
+    try {
+      const response = await getData('events');
+      if (response.ok) {
+        const res = await response.json();
+        dispatch(setEvents(res));
+        setLoading(false);
+      } else {
+        const res = await response.json();
+        setErrorMsg(res.message); 
+        setLoading(false);
+      }
+    } catch (error) {
+      setErrorMsg("Something went wrong");
+      setLoading(false);
+    }
+  }
+
+  const getAllUserEvents =  async () => {
+    try {
+      const response = await getData(`registered-events/${userId}`);
+      if (response.ok) {
+        const res = await response.json();
+        dispatch(setRegisteredEvents(res));
+        setLoading(false);
+      } else {
+        const res = await response.json();
+        setErrorMsg(res.message);
+        setLoading(false);
+      }
+    } catch (error) {
+      setErrorMsg("Something went wrong");
+      setLoading(false);
+    }
+  }
+
   const updateEvents = async (data) => {
     try {
       const body = { user_id: Number(localStorage.getItem('userId')), event_id:  data.event.id };
@@ -49,43 +86,6 @@ function AllEvents () {
       console.error('Error:', error);
     }
   };
-
-  const getAllEvents =  async () => {
-    try {
-      const response = await getData('events');
-      if (response.ok) {
-        const res = await response.json();
-        dispatch(setEvents(res));
-        setLoading(false);
-      } else {
-        const res = await response.json();
-        setErrorMsg(res.message); 
-        setLoading(false);
-      }
-    } catch (error) {
-      setErrorMsg("Something went wrong");
-      setLoading(false);
-    }
-  }
-
-
-  const getAllUserEvents =  async () => {
-    try {
-      const response = await getData(`registered-events/${userId}`);
-      if (response.ok) {
-        const res = await response.json();
-        dispatch(setRegisteredEvents(res));
-        setLoading(false);
-      } else {
-        const res = await response.json();
-        setErrorMsg(res.message);
-        setLoading(false);
-      }
-    } catch (error) {
-      setErrorMsg("Something went wrong");
-      setLoading(false);
-    }
-  }
 
   if (loading) {
     return <Loader></Loader>;
