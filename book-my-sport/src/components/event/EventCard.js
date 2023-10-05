@@ -3,13 +3,16 @@ import {
 } from '@mui/material';
 import Divider from '@mui/material/Divider';
 import PropTypes from 'prop-types';
+import { useSelector } from 'react-redux';
 import { formatDateTimeToDate, formatDateTimeToTime } from '../../utils/eventUtil';
 import '../../styles/page.css';
 
-function EventCard ({ event, allEvents, updateEvents, registeredEventIds }) {
+function EventCard ({ event, isAllEventsList, updateEvents }) {
+
+  const registeredEventIds = useSelector((state) => state.registeredEvents.eventIds);
 
   const handleSubmit = async () => {
-    updateEvents({ event: event, allEvents });
+    updateEvents({ event, isAllEventsList });
   };
 
   return (
@@ -43,8 +46,8 @@ function EventCard ({ event, allEvents, updateEvents, registeredEventIds }) {
             </Typography>
           </Box>
 
-          <Button variant="contained" color={ allEvents ? "secondary" : "error"} onClick={handleSubmit} size="small">
-            {allEvents ? 'Register' : 'Remove'}
+          <Button variant="contained" color={ isAllEventsList ? "secondary" : "error"} onClick={handleSubmit} size="small">
+            {isAllEventsList ? 'Register' : 'Remove'}
           </Button>
         </Box>
       </CardContent>
@@ -61,8 +64,7 @@ EventCard.propTypes = {
     start_time: PropTypes.string.isRequired,
     end_time: PropTypes.string.isRequired,
   }).isRequired,
-  allEvents: PropTypes.bool.isRequired,
+  isAllEventsList: PropTypes.bool.isRequired,
   updateEvents: PropTypes.func.isRequired,
-  registeredEventIds: PropTypes.array
 };
 export default EventCard;

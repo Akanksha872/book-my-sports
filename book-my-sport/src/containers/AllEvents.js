@@ -14,10 +14,7 @@ function AllEvents () {
   const [errorMsg, setErrorMsg] = useState('');
 
   const dispatch = useDispatch();
-  const events = useSelector((state) => state.events);
   const registeredEvents = useSelector((state) => state.registeredEvents.events);
-  const registeredEventIds = useSelector((state) => state.registeredEvents.eventIds);
-
   const userId = localStorage.getItem('userId');
 
   useEffect(() => {
@@ -31,7 +28,7 @@ function AllEvents () {
     try {
       const body = { user_id: Number(localStorage.getItem('userId')), event_id:  data.event.id };
       var response;
-      if(data.allEvents) {
+      if(data.isAllEventsList) {
         if(registeredEvents.length >= 3) {
           setErrorMsg("You can not register in more than 3 events");
           return;
@@ -101,11 +98,7 @@ function AllEvents () {
         open={errorMsg ? true : false}
         message={errorMsg}
       />
-      <AllEventsComponent
-        events={events}
-        registeredEvents={registeredEvents}
-        registeredEventIds={registeredEventIds}
-        updateEvents={updateEvents}
+      <AllEventsComponent updateEvents={updateEvents}
       />
     </>
   );
