@@ -1,8 +1,19 @@
 import Alert from '@mui/material/Alert';
 import Snackbar from '@mui/material/Snackbar';
 import PropTypes from 'prop-types';
+import { useEffect, useState } from 'react';
 
-function SnackbarNotification ({ open, message, handleClose, type }) {
+function SnackbarNotification ({ open, message, type }) {
+  
+  const [openAlert, setOpenAlert] = useState(open);
+
+  useEffect(() => {
+    setOpenAlert(open);
+  }, [open]);
+
+  const handleClose = () =>{
+    setOpenAlert(false);
+  }
   
   const anchorOrigin = {
     vertical: 'top', 
@@ -12,10 +23,7 @@ function SnackbarNotification ({ open, message, handleClose, type }) {
   return (
     <Snackbar
       anchorOrigin={anchorOrigin} 
-      open={open}
-      autoHideDuration={20000} 
-      onClose={handleClose}
-    >
+      open={openAlert}>
       <Alert severity={type} onClose={handleClose}>
         {message}
       </Alert>
@@ -26,7 +34,6 @@ function SnackbarNotification ({ open, message, handleClose, type }) {
 SnackbarNotification.propTypes = {
   open: PropTypes.bool.isRequired, 
   message: PropTypes.string.isRequired, 
-  handleClose: PropTypes.func.isRequired,
   type: PropTypes.string.isRequired,
 };
 
